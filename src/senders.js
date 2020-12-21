@@ -2,15 +2,15 @@ import { bot } from '../app.js';
 import { createInlineKeyboard } from './utils.js';
 
 export const sendInlineKeyboard = (chatId, message, keyboardElements) => {
-  return bot.telegram.sendMessage(chatId, message, createInlineKeyboard(keyboardElements));
+  bot.telegram.sendMessage(chatId, message, createInlineKeyboard(keyboardElements));
 };
 
 export const sendLocation = (chatId, latitude, longtitude, keyboardElements) => {
-  return bot.telegram.sendLocation(chatId, latitude, longtitude, createInlineKeyboard(keyboardElements));
+  bot.telegram.sendLocation(chatId, latitude, longtitude, createInlineKeyboard(keyboardElements));
 };
 
 export const sendVideo = (chatId, video, description, keyboardElements) => {
-  return bot.telegram.sendVideo(
+  bot.telegram.sendVideo(
     chatId,
     video,
     {
@@ -20,14 +20,10 @@ export const sendVideo = (chatId, video, description, keyboardElements) => {
     });
 };
 
-export const sendPhoto = (chatId, photos, description, keyboardElements) => {
-  if (photos.length < 2) {
-
-  }
-
-  return bot.telegram.sendVideo(
+export const sendPhoto = (chatId, photo, description, keyboardElements) => {
+  bot.telegram.sendPhoto(
     chatId,
-    video,
+    photo,
     {
       caption: description,
       parse_mode: 'HTML',
@@ -35,6 +31,13 @@ export const sendPhoto = (chatId, photos, description, keyboardElements) => {
     });
 };
 
-export const sendMedia = (chatId, type, media) => {
-
+export const sendDocument = (chatId, document, description, keyboardElements) => {
+  bot.telegram.sendDocument(
+    chatId,
+    document,
+    {
+      caption: description,
+      parse_mode: 'HTML',
+      ...createInlineKeyboard(keyboardElements)
+    });
 };

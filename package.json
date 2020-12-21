@@ -20,6 +20,7 @@
   "homepage": "https://github.com/peacelovecookies/zqbot#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "telegraf": "^3.38.0",
     "telegraf-i18n": "^6.6.0"
   },

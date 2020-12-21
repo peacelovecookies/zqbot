@@ -1,19 +1,34 @@
 import Telegraf from 'telegraf';
+import express from 'express';
+
 import env from 'dotenv';
 env.config();
 
 import actions from './src/actions.js';
 import { showMainMenu } from './src/utils.js';
 
-export const bot = new Telegraf(process.env.TELEGRAM_API_KEY);
+const app = express();
 
-bot.command('start', (ctx) => {
-  ctx.deleteMessage();
+const botToken = process.env.TELEGRAM_API_KEY || '';
+export const bot = new Telegraf(botToken);
+
+const url = process.env.BOT_DOMAIN || '';
+const PORT = process.env.PORT || 3000;
+
+//bot.telegram.setWebhook(`${url}/bot${botToken}`);
+//bot.startWebhook(, null, 3000);
+//app.use(bot.webhookCallback(`/bot${botToken}`));
+
+bot.start((ctx) => {
+  //ctx.deleteMessage();
   showMainMenu(ctx);
 });
 
-Object.keys(actions).map((action) => {
-  bot.action(action, actions[action]);
+Object.entries(actions).map(([actionName, actionCB]) => {
+  bot.action(actionName, actionCB);
 });
 
 bot.launch();
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });

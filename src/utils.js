@@ -19,16 +19,16 @@ export const createInlineKeyboard = (keyboardElements) => {
 };
 
 export const showMainMenu = (ctx) => {
-  //ctx.deleteMessage();
-  const userName = ctx.from.first_name;
+  // const userName = ctx.from.first_name;
   const message = [
-    [`Здравствуйте, ${userName}! Меня зовут ZQ-bot, я ваш личный помощник.`],
-    ['Я расскажу вам про наши объекты, покажу фото, подскажу актуальные цены и даже помогу получить скидку!'],
+    ['Ассалому алайкум "Zamin Qurilish " компаняси сизга Ж/К "Chilonzor Grand Park", Ж/К "Farhod" ва  Ж/К "Shohona" турар жой мажмуаларини таклиф килади.\n'],
+    ['Сизга кушимча маьлумот сифатида Нарх, Каталог, Геопозиция ва 3D вариантдаги видео роликларни юбордим куриб чикиб саволларингиз булса мурожат килинг.\n'],
+    ['СИЗНИ СОТУВ БУЛИМЛАРИМИЗДА КУТАМИЗ.'],
   ].join('\n');
   const menuElements = [
       [
-          ['Наши объекты', 'sites'],
-          ['Контакты', 'contacts']
+          ['Bizning uylar | Наши объекты', 'sites'],
+          ['Kontaktlar | Контакты', 'contacts']
       ],
   ];
   return sendInlineKeyboard(ctx.chat.id, message, menuElements);

@@ -1,9 +1,11 @@
 import { sendInlineKeyboard, sendLocation, sendVideo, sendPhoto } from './senders.js';
 import { showMainMenu } from './utils.js';
-import sites from './sites.js';
+import Sites from './sites.js';
 
 const actions = {
-  ...sites,
+  // adding all sites actions
+  ...Sites.makeActions(),
+
   main: (ctx) => {
     ctx.deleteMessage();
     showMainMenu(ctx);
@@ -13,22 +15,12 @@ const actions = {
     ctx.deleteMessage();
 
     const message = [
-      ['Сообщение об объектах: '],
-      ['* Выбирите понравившийся объект ниже'],
+      ['Zamin Qurilish kompaniyasi  sizga zamonaviy, havfsiz, ko\'rkam va eng asosiysi shinam uylarni taklif etadi.\n'],
+      ['Bo\'lajak uyingizni tanlang:'],
     ].join('\n');
-    const elements = [
-      [
-        ['Жилой комплекс "Farhod"', 'farhod'],
-        ['Объект Б', 'siteB'],
-      ],
-      [
-        ['Объект В', 'siteC'],
-        ['Объект Г', 'siteD'],
-      ],
-      [
-        ['На главную', 'main'],
-      ],
-    ];
+    const elements = Object.entries(Sites.info)
+      .map(([actionName, { name: siteName }]) => [[siteName, actionName]]);
+    elements.push([['Bosh sahifa | На главную', 'main']]);
     sendInlineKeyboard(ctx.chat.id, message, elements);
   },
 
@@ -42,27 +34,27 @@ const actions = {
   
     const elements = [
       [
-        ['мы на Чиланзар 17', 'locationChilonzor17'],
-        ['мы где-то еще', 'locationSomethingSomething'],
+        ['Lokatsiya | Локация', 'locationChilonzorOffice'],
       ],
       [
-        ['На главную', 'main'],
+        ['Bosh sahifa | На главную', 'main'],
       ]
     ];
   
     sendInlineKeyboard(ctx.chat.id, message, elements);
   },
 
-  locationChilonzor17: (ctx) => {
+  // locations
+  locationChilonzorOffice: (ctx) => {
     ctx.deleteMessage();
     const latitude = 41.270152;
     const longtitude = 69.194564;
     const elements = [
       [
-        ['Связаться с менеджером', '', 'https://t.me/zamin_qurilish']
+        ['Menejer bilan bog\'lanish | Связаться с менеджером', '', 'https://t.me/zamin_qurilish']
       ],
       [
-        ['Назад', 'contacts'],
+        ['Orqaga | Назад', 'contacts'],
       ],
     ]
     sendLocation(ctx.chat.id, latitude, longtitude, elements);
