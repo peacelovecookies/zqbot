@@ -1,5 +1,8 @@
 import { sendInlineKeyboard } from './senders.js';
 
+import fs from 'fs';
+import path from 'path';
+
 export const createInlineKeyboard = (keyboardElements) => {
   const buttons = keyboardElements.map((row) => row.map(([text, callback_data, url]) => {
       const parsed = {
@@ -19,25 +22,38 @@ export const createInlineKeyboard = (keyboardElements) => {
 };
 
 export const showMainMenu = (ctx) => {
-  // const userName = ctx.from.first_name;
-  const message = [
-    ['Ассалому алайкум "Zamin Qurilish " компаняси сизга Ж/К "Chilonzor Grand Park", Ж/К "Farhod" ва  Ж/К "Shohona" турар жой мажмуаларини таклиф килади.\n'],
-    ['Сизга кушимча маьлумот сифатида Нарх, Каталог, Геопозиция ва 3D вариантдаги видео роликларни юбордим куриб чикиб саволларингиз булса мурожат килинг.\n'],
-    ['СИЗНИ СОТУВ БУЛИМЛАРИМИЗДА КУТАМИЗ.'],
-  ].join('\n');
-  const menuElements = [
-      [
-          ['Bizning uylar | Наши объекты', 'sites'],
-          ['Kontaktlar | Контакты', 'contacts']
-      ],
-  ];
-  return sendInlineKeyboard(ctx.chat.id, message, menuElements);
+  try {
+    ctx.deleteMessage();
+    // const userName = ctx.from.first_name;
+    const message = [
+      ['Ассалому алайкум "Zamin Qurilish " компаняси сизга Ж/К "Chilonzor Grand Park", Ж/К "Farhod" ва  Ж/К "Shohona" турар жой мажмуаларини таклиф килади.\n'],
+      ['Сизга кушимча маьлумот сифатида Нарх, Каталог, Геопозиция ва 3D вариантдаги видео роликларни юбордим куриб чикиб саволларингиз булса мурожат килинг.\n'],
+      ['СИЗНИ СОТУВ БУЛИМЛАРИМИЗДА КУТАМИЗ.'],
+    ].join('\n');
+    const menuElements = [
+        [
+            ['Bizning uylar | Наши объекты', 'sites'],
+            ['Kontaktlar | Контакты', 'contacts']
+        ],
+    ];
+    return sendInlineKeyboard(ctx.chat.id, message, menuElements);
+  } catch (err) {}
 };
 
-export const deleteTwoLastMessages = (ctx) => {
+export const deleteTwoLastMessages = async (ctx) => {
     const chatId = ctx.chat.id;
     const messageId = ctx.update.callback_query.message.message_id;
+    try {
+      await ctx.deleteMessage(messageId, chatId);
+      await ctx.deleteMessage(messageId - 1, chatId);
+    } catch (err) {
+      // console.log(err);
+    }
+};
 
-    ctx.deleteMessage(messageId, chatId);
-    ctx.deleteMessage(messageId - 1, chatId);
+export const readFile = (filepath) => {
+  const currentDir = process.cwd();
+  const fullpath = path.resolve(currentDir, filepath);
+  const file = fs.readFileSync(fullpath, 'utf-8');
+  return file;
 };
