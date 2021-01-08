@@ -4,10 +4,11 @@ import fs from 'fs';
 import path from 'path';
 
 export const createInlineKeyboard = (keyboardElements) => {
-  const buttons = keyboardElements.map((row) => row.map(([text, callback_data, url]) => {
+  const buttons = keyboardElements.map((row) => row.map(([text, callback_data, url, disable_notification = false]) => {
       const parsed = {
           text,
           callback_data,
+          disable_notification,
       };
       if (url) {
           parsed.url = url;
@@ -41,9 +42,9 @@ export const showMainMenu = (ctx) => {
 };
 
 export const deleteTwoLastMessages = async (ctx) => {
-    const chatId = ctx.chat.id;
-    const messageId = ctx.update.callback_query.message.message_id;
-    try {
+  try {
+      const chatId = ctx.chat.id;
+      const messageId = ctx.update.callback_query.message.message_id;
       await ctx.deleteMessage(messageId, chatId);
       await ctx.deleteMessage(messageId - 1, chatId);
     } catch (err) {
@@ -56,4 +57,18 @@ export const readFile = (filepath) => {
   const fullpath = path.resolve(currentDir, filepath);
   const file = fs.readFileSync(fullpath, 'utf-8');
   return file;
+};
+
+export const sendToLog = (ctx) => {
+  try {
+    const { id, first_name, last_name, username } = ctx.from;
+    const msg = [
+      [`user id: ${id}`],
+      [`first name: ${first_name}`],
+      [`last name: ${last_name}`],
+      [`username: ${username}`],
+    ].join('\n');
+    const logGroupId = -463855567;
+    sendInlineKeyboard(logGroupId, msg, null, true);
+  } catch(e) {}
 };
