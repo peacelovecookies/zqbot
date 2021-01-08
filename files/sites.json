@@ -19,8 +19,17 @@
       "message": ""
     },
     "discounts": {
-      "file_id": "BQACAgIAAxkBAAEII0df15KpgqklqyUoG3CwEssoSZd28wACcAwAAh3yuUrAPQoi-F-kMh4E",
-      "message": ""
+      "file_id": "",
+      "message": [
+        ["💎   100% to'lov uchun 15-21% chegirma"],
+        ["💰   50% to'lov uchun 5-10% chegirma va 12/24 oylik muddatli to'lov usuli bor"],
+        ["💵   35% to'lov uchun va 12/24 oylik muddatli to'lov usuli bor"],
+        ["\nTo'liq ma'lumot uchun menejer bilan bo'g'laning:"],
+        ["\n📞   +998 97 777 72 21"],
+        ["\n📞   +998 95 363 55 55"],
+        ["\n📞   +998 95 323 55 55"],
+        ["\n📞   +998 99 006 66 66"]
+      ]
     }
   },
   "farhod": {
@@ -28,8 +37,8 @@
     "video": "BAACAgIAAxkBAAEIE-xfz60ECr1H_W0BAAHfAk6S8uNL73oAAtwFAAIokiFKXoJe6qJRHRUeBA",
     "description": "Курилишимиз 2021 йил 2 - чоракда тугалланиш мулжалланган умумий майдон 0,7 гектарда жойлашган. Умумий 7 та подезд 234 та квартирадан 1, 2, 3 хонадан иборат 46 метр квадратдан 93,5 метр квадратгача. 9 этажлик килиб курилган. Батафсил маьлумотларни Сотув булимларимиздан олишингиз мумкун.",
     "location": [
-      41.281519,
-      69.187071
+      41.281857,
+      69.187548
     ],
     "catalog": {
       "file_id": "BQACAgIAAxkBAAEII0Vf15KAu53t0AjWzWsEDu4hLWGVSgACbwwAAh3yuUqBvjawNOFAFB4E",
@@ -41,7 +50,16 @@
     },
     "discounts": {
       "file_id": "",
-      "message": ""
+      "message": [
+        ["💎   100% to'lov uchun 15% chegirma"],
+        ["💰   50% to'lov uchun 5-10% chegirma va 12/24 oylik muddatli to'lov usuli bor"],
+        ["💵   35% to'lov uchun va 12 oylik muddatli to'lov usuli bor"],
+        ["\nTo'liq ma'lumot uchun menejer bilan bo'g'laning:"],
+        ["\n📞   +998 97 777 72 21"],
+        ["\n📞   +998 95 363 55 55"],
+        ["\n📞   +998 95 323 55 55"],
+        ["\n📞   +998 99 006 66 66"]
+      ]
     }
   },
   "grand_park": {
@@ -62,7 +80,16 @@
     },
     "discounts": {
       "file_id": "",
-      "message": ""
+      "message": [
+        ["💎   100% to'lov uchun 10% chegirma"],
+        ["💰   50% to'lov uchun 5% chegirma va 12 oylik muddatli to'lov usuli bor"],
+        ["💵   35% to'lov uchun va 12 oylik muddatli to'lov usuli bor"],
+        ["\nTo'liq ma'lumot uchun menejer bilan bo'g'laning:"],
+        ["\n📞   +998 97 777 72 21"],
+        ["\n📞   +998 95 363 55 55"],
+        ["\n📞   +998 95 323 55 55"],
+        ["\n📞   +998 99 006 66 66"]
+      ]
     }
   }
 }
