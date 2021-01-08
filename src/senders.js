@@ -2,25 +2,34 @@ import { bot } from '../app.js';
 import { createInlineKeyboard } from './utils.js';
 
 const sendErrorMessage = (err) => {
-  const { method, payload: { chat_id } } = err.on;
-  bot.telegram.sendMessage(
-    chat_id,
-    'We are really sorry, but something went wrong. Please, restart bot',
-    createInlineKeyboard([
-      [
-        ['Restart', 'main'],
-      ],
-    ]),
+  try {
+    const { method, payload: { chat_id } } = err.on;
+    bot.telegram.sendMessage(
+      chat_id,
+      'We are really sorry, but something went wrong. Please, restart bot',
+      createInlineKeyboard([
+        [
+          ['Restart', 'main'],
+        ],
+      ]),
     );
 
-  const errMessage = [
-    '\nERROR:\n',
-    `date:      ${new Date().toString()}`, 
-    `chat id:   ${chat_id}`,
-    `method:    ${method}`,
-  ].join('\n');
-  const logGroupId = -463855567;
-  bot.telegram.sendMessage(logGroupId, errMessage);
+    const fixedButton = [
+      [
+        ['fixed', `confirmFixation ${chat_id}`],
+      ],
+    ];
+
+    const errMessage = [
+      '\nERROR:\n',
+      `date:        ${new Date().toString()}`, 
+      `chat id:     ${chat_id}`,
+      `method:      ${method}`,
+      `description: ${err.description}`,
+    ].join('\n');
+    const logGroupId = -463855567;
+    sendInlineKeyboard(logGroupId, errMessage, fixedButton);
+  } catch(e) {} 
 };
 
 export const sendInlineKeyboard = async (chatId, message, keyboardElements) => {
@@ -35,7 +44,7 @@ export const sendLocation = async (chatId, latitude, longtitude, keyboardElement
   try {
     await bot.telegram.sendLocation(chatId, latitude, longtitude, createInlineKeyboard(keyboardElements));
   } catch (err) {
-    sendErrorMessage(err.on.payload.chat_id);
+    sendErrorMessage(err);
   }
 };
 
@@ -65,7 +74,7 @@ export const sendPhoto = async (chatId, photo, description, keyboardElements) =>
         ...createInlineKeyboard(keyboardElements)
       });
   } catch (err) {
-    sendErrorMessage(err.on.payload.chat_id);
+    sendErrorMessage(err);
   }
 };
 
