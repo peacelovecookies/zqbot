@@ -5,7 +5,7 @@ import env from 'dotenv';
 env.config();
 
 import actions from './src/actions.js';
-import { showMainMenu } from './src/utils.js';
+import { showMainMenu, sendToLog } from './src/utils.js';
 
 const app = express();
 
@@ -20,10 +20,15 @@ export const bot = new Telegraf(botToken);
 //app.use(bot.webhookCallback(`/bot${botToken}`));
 
 bot.start((ctx) => {
+  sendToLog(ctx);
   showMainMenu(ctx);
 });
 
 Object.entries(actions).map(([actionName, actionCB]) => {
+  if (actionName === 'confirmFixation') {
+    const confirmFixationRegex = /^confirmFixation [0-9]+/;
+    return bot.action(confirmFixationRegex, actionCB);
+  }
   bot.action(actionName, actionCB);
 });
 
